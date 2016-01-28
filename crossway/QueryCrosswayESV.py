@@ -26,15 +26,20 @@ class OnlineESVToSQLiteConverter:
         self.create_table()
         self.convert_all()
 
+    def closeDB(self):
+        self.dbconn.commit()
+        self.dbconn.close()
+
     def create_table(self):
         self.cursor.execute('''
-            create table BIBLE (BOOK TEXT, CHAPTER INTEGER, VERSE INTEGER, SCRIPTURE TEXT
+            create table BIBLE (BOOK TEXT, CHAPTER INTEGER, VERSE INTEGER, SCRIPTURE TEXT)
         ''')
         self.dbconn.commit()
 
     def extract_verse(self):
         for bookabbr in generateBibleBookAbbrs():
-            for chapidx in range(numchaps[bookabbr]):
+            for chapidx in range(1, numchaps[bookabbr]+1):
+                print getBookName(bookabbr), chapidx
                 xmlstr = '\n'.join(self.parser.query(bookabbr, chapidx))
                 dom = parseString(xmlstr)
                 for item in dom.getElementsByTagName('verse-unit'):
@@ -53,9 +58,7 @@ class OnlineESVToSQLiteConverter:
 
     def convert_all(self):
         for infotuple in self.extract_verse():
-            self.cursor.executemany('insert into BIBLE (BOOK, CHAPTER, VERSE, SCRIPTURE) values (?)', infotuple)
+            self.cursor.executemany('insert into BIBLE (BOOK, CHAPTER, VERSE, SCRIPTURE) values (?, ?, ?, ?)',
+                                    [infotuple])
         self.dbconn.commit()
 
-    def closeDB(self):
-        self.dbconn.commit()
-        self.dbconn.close()

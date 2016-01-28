@@ -13,5 +13,5 @@ if __name__ == '__main__':
 
     online_parser = qCross.CrosswayOnlineESVParser(args.key)
     converter = qCross.OnlineESVToSQLiteConverter(online_parser, args.sqlitepath)
-    converter.convert_all()
+    converter.run()
     converter.closeDB()
