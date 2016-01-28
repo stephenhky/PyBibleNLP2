@@ -4,6 +4,8 @@ import urllib
 import urllib2
 import sqlite3
 
+# API for retrieving ESV bible
+# access key requested at http://www.esvapi.org/
 baseurl = 'http://www.esvapi.org/v2/rest/'
 
 class CrosswayOnlineESVParser:
