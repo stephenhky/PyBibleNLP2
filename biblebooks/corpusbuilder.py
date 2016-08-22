@@ -1,7 +1,6 @@
 from gensim import corpora
 import sqlite3
 from nltk import word_tokenize
-from operator import add
 import BibleAbbrDict as abbr
 
 def build_gensumcorpus(documents):
@@ -23,8 +22,6 @@ def retrieve_docs_as_biblechapters(biblesqlite_path):
 def retrieve_docs_as_biblebooks(biblesqlite_path):
     dbconn = sqlite3.connect(biblesqlite_path)
     cursor = dbconn.cursor()
-    doc_labels = []
-    doc_tokens = []
     for book in abbr.otbookdict.keys() + abbr.ntbookdict.keys():
         doc_label = book
         result = cursor.execute('select scripture from bible where book is "'+book)
