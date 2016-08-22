@@ -9,7 +9,7 @@ def build_gensumcorpus(documents):
     corpus = [dictionary.doc2bow(text) for text in documents]
     return dictionary, corpus
 
-def build_biblebook_corpus(biblesqlite_path, preprocess=lambda text: text):
+def build_biblechapters_corpus(biblesqlite_path, preprocess=lambda text: text):
     dbconn = sqlite3.connect(biblesqlite_path)
     cursor = dbconn.cursor()
     doc_labels = []
