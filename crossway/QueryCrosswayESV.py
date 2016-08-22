@@ -64,3 +64,5 @@ class OnlineESVToSQLiteConverter:
                                     [infotuple])
         self.dbconn.commit()
 
+def getESVBibleDBConnection(sqlite_filepath):
+    return sqlite3.connect(sqlite_filepath)
