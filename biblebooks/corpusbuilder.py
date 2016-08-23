@@ -8,8 +8,7 @@ def build_gensumcorpus(documents):
     corpus = [dictionary.doc2bow(text) for text in documents]
     return dictionary, corpus
 
-def retrieve_docs_as_biblechapters(biblesqlite_path):
-    dbconn = sqlite3.connect(biblesqlite_path)
+def retrieve_docs_as_biblechapters(dbconn):
     cursor = dbconn.cursor()
     for book in abbr.otbookdict.keys() + abbr.ntbookdict.keys():
         for chap in range(1, abbr.numchaps[book]+1):
@@ -19,8 +18,7 @@ def retrieve_docs_as_biblechapters(biblesqlite_path):
             yield doc_label, doc_text
     cursor.close()
 
-def retrieve_docs_as_biblebooks(biblesqlite_path):
-    dbconn = sqlite3.connect(biblesqlite_path)
+def retrieve_docs_as_biblebooks(dbconn):
     cursor = dbconn.cursor()
     for book in abbr.otbookdict.keys() + abbr.ntbookdict.keys():
         doc_label = book
@@ -29,11 +27,13 @@ def retrieve_docs_as_biblebooks(biblesqlite_path):
         yield doc_label, doc_text
     cursor.close()
 
-def build_corpus(doc_iterator, preprocess=lambda text: text):
+def build_corpus(doc_iterator, preprocess=lambda text: word_tokenize(text)):
     doc_labels = []
     doc_tokens = []
     for doc_label, doc_text in doc_iterator:
         doc_labels += [doc_label]
-        doc_tokens += [word_tokenize(preprocess(doc_text))]
+        doc_tokens += [preprocess(doc_text)]
     return doc_labels, build_gensumcorpus(doc_tokens)
 
+def get_sqlite3_dbconn(biblesqlite_path):
+    return sqlite3.connect(biblesqlite_path)
