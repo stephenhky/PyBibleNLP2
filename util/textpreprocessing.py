@@ -9,11 +9,11 @@ tokenizer = SpaceTokenizer()
 stemmer = PorterStemmer()
 
 # define each steps
-pipeline1 = [lambda s: re.sub('[^\w\s]', '', s),
-             lambda s: re.sub('[\d]', '', s),
-             lambda s: s.lower(),
-             lambda s: ' '.join(filter(lambda s: not (s in stopwords.words()), tokenizer.tokenize(s))),
-             lambda s: ' '.join(map(lambda t: stemmer.stem(t), tokenizer.tokenize(s)))
+pipeline1 = [lambda s: re.sub('[^\w\s]', '', s),     # remove special characters
+             lambda s: re.sub('[\d]', '', s),        # remove numbers
+             lambda s: s.lower(),                    # lower case
+             lambda s: ' '.join(filter(lambda s: not (s in stopwords.words()), tokenizer.tokenize(s))),   # remove stop words
+             lambda s: ' '.join(map(lambda t: stemmer.stem(t), tokenizer.tokenize(s)))   # stem (using Porter stemmer)
              ]
 pipeline2 = [lambda s: re.sub('[^\w\s]', '', s),
              lambda s: re.sub('[\d]', '', s),
