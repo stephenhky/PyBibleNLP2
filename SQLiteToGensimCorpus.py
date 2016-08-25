@@ -1,4 +1,5 @@
-import biblebooks.corpusbuilder as cpbuilder
+import biblebooks.bibledocs_iterator as bibledocs
+import biblebooks.gensimcorpus_builder as cpbuilder
 import util.textpreprocessing as prep
 import util.corpus_io as io
 import argparse
@@ -16,8 +17,8 @@ if __name__ == '__main__':
     args = parser.parse_args()
 
     print 'Read the database'
-    sqlite_bible = cpbuilder.get_sqlite3_dbconn(args.sqlite_bible_path)
-    doc_iterator = cpbuilder.retrieve_docs_as_biblebooks(sqlite_bible) if args.book else cpbuilder.retrieve_docs_as_biblechapters(sqlite_bible)
+    sqlite_bible = bibledocs.get_sqlite3_dbconn(args.sqlite_bible_path)
+    doc_iterator = bibledocs.retrieve_docs_as_biblebooks(sqlite_bible) if args.book else bibledocs.retrieve_docs_as_biblechapters(sqlite_bible)
     print 'Build the corpus'
     doc_label, (dictionary, gensim_corpus) = cpbuilder.build_corpus(doc_iterator,
                                                                     preprocess=lambda s: word_tokenize(prep.preprocess_text(s, prep.pipeline1))
