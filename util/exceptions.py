@@ -29,3 +29,7 @@ class TokenNotFoundException(BibleException):
 class NoBibleTranslationException(BibleException):
     def __init__(self, transver):
         self._message = 'No such translation ('+transver+') supported.'
+
+class ModelNotTrainedException(Exception):
+    def __init__(self):
+        self._message = 'Model not trained.'

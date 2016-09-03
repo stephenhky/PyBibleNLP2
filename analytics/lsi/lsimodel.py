@@ -1,10 +1,10 @@
-from operator import add
 
 from gensim.models import LsiModel, TfidfModel
 from gensim.similarities import MatrixSimilarity
 from nltk import word_tokenize
 
 import util.textpreprocessing as prep
+import util.exceptions as exceptions
 
 class CorpusLsiModelWrapper:
     def __init__(self, corpus, dictionary, doc_labels, preprocessing_pipeline, numtopics,
@@ -29,6 +29,8 @@ class CorpusLsiModelWrapper:
         self.index = MatrixSimilarity(self.model[self.masked_corpus])
 
     def convertTextToReducedVector(self, text):
+        if not self.trained:
+            raise exceptions.ModelNotTrainedException()
         tokens = word_tokenize(prep.preprocess_text(text, self.pipeline))
         tokens = filter(lambda token: self.dictionary.token2id.has_key(token), tokens)
         bow = self.dictionary.doc2bow(tokens)
