@@ -11,7 +11,8 @@ def load_corpus(prefix):
 
 def save_doclabel(doc_labels, outputfilename):
     outputfile = open(outputfilename, 'wb')
-    outputfile.writelines(doc_labels)
+    for doc_label in doc_labels:
+        outputfile.write(doc_label+'\n')
     outputfile.close()
 
 def load_doclabel(inputfilename):
