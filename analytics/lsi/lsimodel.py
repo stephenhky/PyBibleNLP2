@@ -26,7 +26,7 @@ class CorpusLsiModelWrapper:
             self.masked_corpus = self.corpus
 
         # training
-        self.model = LsiModel(self.masked_corpus, num_topics=self.numtopics)
+        self.model = LsiModel(self.masked_corpus, id2word=self.dictionary, num_topics=self.numtopics)
         self.index = MatrixSimilarity(self.model[self.masked_corpus])
 
         # flag
