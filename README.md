@@ -5,7 +5,7 @@ Crossway API. They can be converted to an SQLite database. However,
 it is also nice if you have other translations that are converted
 to this SQLite database format.
 
-## Converting ESV Bible into an SqLite Database
+## Converting ESV Bible into an SQLite Database
 Before conversion, go to <http://www.esvapi.org/> to sign up for a key.
 Once you receive the key, run the script `convertCrosswayESVToSQLite.py`. 
 Its help message is as follow:
