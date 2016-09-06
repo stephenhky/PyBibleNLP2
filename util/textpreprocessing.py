@@ -20,6 +20,7 @@ pipeline2 = [lambda s: re.sub('[^\w\s]', '', s),
              lambda s: s.lower(),
              lambda s: ' '.join(filter(lambda s: not (s in stopwords.words()), tokenizer.tokenize(s)))
              ]
+stopword_removal_pipeline = [lambda s: ' '.join(filter(lambda s: not (s in stopwords.words()), tokenizer.tokenize(s)))]
 
 # pipeline handling
 def preprocess_text(text, pipeline):
