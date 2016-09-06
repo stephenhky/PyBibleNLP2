@@ -1,4 +1,4 @@
-from gensim.models import word2vec
+# from gensim.models import word2vec
 import numpy as np
 from nltk import word_tokenize
 from scipy.spatial.distance import cosine
