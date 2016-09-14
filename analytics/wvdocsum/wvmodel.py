@@ -1,4 +1,4 @@
-# from gensim.models import word2vec
+from gensim.models.word2vec import Word2Vec
 import numpy as np
 from nltk import word_tokenize
 from scipy.spatial.distance import cosine
@@ -39,3 +39,7 @@ class WVModelRetriever:
         for doc_label in self.doc_wvdict:
             sim[doc_label] = 1 - cosine(wvvec, self.doc_wvdict[doc_label])
         return sorted(sim.items(), key=lambda p: p[1], reverse=True)
+
+def get_wvmodel_retriever(dociter, word2vec_model_path, binary=True, *args, **kwargs):
+    wvmodel = Word2Vec.load_word2vec_format(word2vec_model_path, binary=binary)
+    return WVModelRetriever(dociter, wvmodel, *args, **kwargs)
