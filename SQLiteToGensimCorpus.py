@@ -1,9 +1,8 @@
 import biblebooks.bibledocs_iterator as bibledocs
 import biblebooks.gensimcorpus_builder as cpbuilder
-import util.textpreprocessing as prep
 import util.corpus_io as io
 import argparse
-from nltk import word_tokenize
+from shorttext.utils import tokenize, standard_text_preprocessor_1
 
 def argument_parser():
     parser = argparse.ArgumentParser(description='Converting SQLite Bible to Gensim Corpus')
@@ -21,7 +20,7 @@ if __name__ == '__main__':
     doc_iterator = bibledocs.retrieve_docs_as_biblebooks(sqlite_bible) if args.book else bibledocs.retrieve_docs_as_biblechapters(sqlite_bible)
     print 'Build the corpus'
     doc_label, (dictionary, gensim_corpus) = cpbuilder.build_corpus(doc_iterator,
-                                                                    preprocess=lambda s: word_tokenize(prep.preprocess_text(s, prep.pipeline1))
+                                                                    preprocess=lambda s: tokenize(standard_text_preprocessor_1(s))
                                                                    )
     print 'Save the corpus'
     io.save_corpus(dictionary, gensim_corpus, args.target_path_prefix)

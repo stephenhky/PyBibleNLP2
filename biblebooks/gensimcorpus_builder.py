@@ -1,12 +1,12 @@
 from gensim import corpora
-from nltk import word_tokenize
+from shorttext.utils import tokenize
 
 def build_gensumcorpus(documents):
     dictionary = corpora.Dictionary(documents)
     corpus = [dictionary.doc2bow(text) for text in documents]
     return dictionary, corpus
 
-def build_corpus(doc_iterator, preprocess=lambda text: word_tokenize(text)):
+def build_corpus(doc_iterator, preprocess=tokenize):
     doc_labels = []
     doc_tokens = []
     for doc_label, doc_text in doc_iterator:
