@@ -4,10 +4,13 @@ from shorttext.utils import tokenize
 import re
 
 # define each steps
+# pipeline1 defined in shorttext
+
 pipeline2 = [lambda s: re.sub('[^\w\s]', '', s),
              lambda s: re.sub('[\d]', '', s),
              lambda s: s.lower(),
              lambda s: ' '.join(filter(lambda s: not (s in stopwordset), tokenize(s)))
              ]
+
 stopword_removal_pipeline = [lambda s: ' '.join(filter(lambda s: not (s in stopwordset), tokenize(s)))]
 
