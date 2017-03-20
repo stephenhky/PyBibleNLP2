@@ -1,4 +1,5 @@
 import sqlite3
+from collections import defaultdict
 
 from biblebooks import BibleAbbrDict as abbr
 
@@ -23,3 +24,16 @@ def retrieve_docs_as_biblebooks(dbconn):
 
 def get_sqlite3_dbconn(biblesqlite_path):
     return sqlite3.connect(biblesqlite_path)
+
+
+def generate_classdict_chapters(bible_dbconn):
+    classdict = defaultdict(lambda : [])
+    for bible_chap, verses in retrieve_docs_as_biblechapters(bible_dbconn):
+        classdict[bible_chap] += [verses]
+    return dict(classdict)
+
+def generate_classdict_books(bible_dbconn):
+    classdict = defaultdict(lambda : [])
+    for bible_book, verses in retrieve_docs_as_biblebooks(bible_dbconn):
+        classdict[bible_book] += [verses]
+    return dict(classdict)
