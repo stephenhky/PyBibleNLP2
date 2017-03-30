@@ -51,3 +51,7 @@ optional arguments:
   -h, --help          show this help message and exit
   --book              books (not chapters) as documents
 ```
+
+# Model Training
+
+The project depends also on `shorttext`: [stephenhky/PyShortTextCategorization](https://github.com/stephenhky/PyShortTextCategorization)  / [API](https://pythonhosted.org/shorttext/)
