@@ -9,7 +9,7 @@ def argument_parser():
     parser = argparse.ArgumentParser(description='Train topic models')
     parser.add_argument('bible_sqlitepath', help='location of the bible')
     parser.add_argument('dir', help='directory of the models')
-    parser.add_argument('algo', help='algorithm (LDA / LSI / RP')
+    parser.add_argument('algo', help='algorithm (lda / lsi / rp)')
     return parser
 
 nbs_topics = [128, 256, 512, 1024, 2048]
