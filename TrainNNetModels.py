@@ -21,7 +21,7 @@ frameworkdict = {'CNN': frameworks.CNNWordEmbed,
 
 nb_filters = 1200
 ngrams_options = [2, 3, 4]
-nb_repeats = 10
+nb_repeats = 3
 
 def main(argnames):
     print 'Loading Word2Vec model...'
