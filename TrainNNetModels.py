@@ -27,7 +27,7 @@ def main(argnames):
     print('Loading Word2Vec model...')
     wvmodel = load_word2vec_model(argnames.wvmodel_path)
 
-    print 'Loading data...'
+    print('Loading data...')
     dbconn = bit.get_sqlite3_dbconn(argnames.bible_sqlitepath)
     biblecorpus = bit.generate_classdict_chapters(dbconn)
 
