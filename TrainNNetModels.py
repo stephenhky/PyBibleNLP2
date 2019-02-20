@@ -24,17 +24,17 @@ ngrams_options = [2, 3, 4]
 nb_repeats = 3
 
 def main(argnames):
-    print 'Loading Word2Vec model...'
+    print('Loading Word2Vec model...')
     wvmodel = load_word2vec_model(argnames.wvmodel_path)
 
     print 'Loading data...'
     dbconn = bit.get_sqlite3_dbconn(argnames.bible_sqlitepath)
     biblecorpus = bit.generate_classdict_chapters(dbconn)
 
-    print 'Training...'
+    print('Training...')
     for ngrams in ngrams_options:
         for i in range(nb_repeats):
-            print 'Training ', argnames.algo, '; ngrams: ', ngrams, '; round ', i
+            print('Training ', argnames.algo, '; ngrams: ', ngrams, '; round ', i)
 
             modelname = argnames.algo+'_'+str(ngrams)+'gram_chap_model'+str(i)+'.bin'
 
