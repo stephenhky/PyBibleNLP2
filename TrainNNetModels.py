@@ -38,7 +38,7 @@ def main(argnames):
 
             modelname = argnames.algo+'_'+str(ngrams)+'gram_chap_model'+str(i)+'.bin'
 
-            kmodel = frameworkdict[argnames.algo](len(biblecorpus.keys()), n_gram=ngrams, nb_filters=nb_filters)
+            kmodel = frameworkdict[argnames.algo](len(biblecorpus.keys()), n_gram=ngrams, nb_filters=nb_filters, vecsize=300)
             classifier = VarNNEmbeddedVecClassifier(wvmodel)
             classifier.train(biblecorpus, kmodel)
             classifier.save_compact_model(os.path.join(argnames.dir, modelname))
