@@ -1,5 +1,6 @@
 import sqlite3
 from collections import defaultdict
+from functools import reduce
 
 from nltk import sent_tokenize
 
