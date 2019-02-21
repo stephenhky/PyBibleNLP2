@@ -7,7 +7,7 @@ from biblebooks import BibleAbbrDict as abbr
 
 def retrieve_docs_as_biblechapters(dbconn):
     cursor = dbconn.cursor()
-    for book in abbr.otbookdict.keys() + abbr.ntbookdict.keys():
+    for book in abbr.wholebible_book_iterator():
         for chap in range(1, abbr.numchaps[book]+1):
             doc_label = book+'_'+str(chap)
             result = cursor.execute('select scripture from bible where book is "'+book+'" and chapter='+str(chap))
