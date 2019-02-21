@@ -17,7 +17,7 @@ def retrieve_docs_as_biblechapters(dbconn):
 
 def retrieve_docs_as_biblebooks(dbconn):
     cursor = dbconn.cursor()
-    for book in abbr.otbookdict.keys() + abbr.ntbookdict.keys():
+    for book in abbr.wholebible_book_iterator():
         doc_label = book
         result = cursor.execute('select scripture from bible where book is "'+book+'"')
         doc_text = reduce(lambda s1, s2: ' '.join([s1, s2]), [texttuple[0] for texttuple in result])

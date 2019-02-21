@@ -71,6 +71,13 @@ ntbookdict = {
 		"rev": "Revelation"
 }
 
+def wholebible_book_iterator():
+	for bookabbr in otbookdict:
+		yield bookabbr
+	for bookabbr in ntbookdict:
+		yield bookabbr
+
+
 def getBookName(key):
     if otbookdict.has_key(key):
         return otbookdict[key]
